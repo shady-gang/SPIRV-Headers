@@ -248,6 +248,7 @@ enum StorageClass {
     StorageClassCodeSectionINTEL = 5605,
     StorageClassDeviceOnlyINTEL = 5936,
     StorageClassHostOnlyINTEL = 5937,
+    StorageClassCodeSectionSHADY = 6592,
     StorageClassMax = 0x7fffffff,
 };
 
@@ -641,6 +642,9 @@ enum Decoration {
     DecorationConditionalINTEL = 6247,
     DecorationCacheControlLoadINTEL = 6442,
     DecorationCacheControlStoreINTEL = 6443,
+    DecorationIndirectlyCallableSHADY = 6592,
+    DecorationIndirectUnsafeSHADY = 6593,
+    DecorationReentrantSHADY = 6594,
     DecorationMax = 0x7fffffff,
 };
 
@@ -1290,6 +1294,10 @@ enum Capability {
     CapabilityCacheControlsINTEL = 6441,
     CapabilityRegisterLimitsINTEL = 6460,
     CapabilityBindlessImagesINTEL = 6528,
+    CapabilityIndirectTailCallsSHADY = 6592,
+    CapabilityPhysicalFunctionAddressesSHADY = 6593,
+    CapabilityInModuleFunctionAddressSHADY = 6594,
+    CapabilityCallStackSHADY = 6595,
     CapabilityMax = 0x7fffffff,
 };
 
@@ -2437,6 +2445,9 @@ enum Op {
     OpConvertHandleToImageINTEL = 6529,
     OpConvertHandleToSamplerINTEL = 6530,
     OpConvertHandleToSampledImageINTEL = 6531,
+    OpIndirectTailCallSHADY = 6594,
+    OpIndirectCallSHADY = 6595,
+    OpConstantFunctionAddressSHADY = 6596,
     OpMax = 0x7fffffff,
 };
 
@@ -3270,6 +3281,9 @@ inline void HasResultAndType(Op opcode, bool *hasResult, bool *hasResultType) {
     case OpConvertHandleToImageINTEL: *hasResult = true; *hasResultType = true; break;
     case OpConvertHandleToSamplerINTEL: *hasResult = true; *hasResultType = true; break;
     case OpConvertHandleToSampledImageINTEL: *hasResult = true; *hasResultType = true; break;
+    case OpIndirectTailCallSHADY: *hasResult = false; *hasResultType = false; break;
+    case OpIndirectCallSHADY: *hasResult = true; *hasResultType = true; break;
+    case OpConstantFunctionAddressSHADY: *hasResult = true; *hasResultType = true; break;
     }
 }
 inline const char* SourceLanguageToString(SourceLanguage value) {
@@ -3467,6 +3481,7 @@ inline const char* StorageClassToString(StorageClass value) {
     case StorageClassCodeSectionINTEL: return "CodeSectionINTEL";
     case StorageClassDeviceOnlyINTEL: return "DeviceOnlyINTEL";
     case StorageClassHostOnlyINTEL: return "HostOnlyINTEL";
+    case StorageClassCodeSectionSHADY: return "CodeSectionSHADY";
     default: return "Unknown";
     }
 }
@@ -3799,6 +3814,9 @@ inline const char* DecorationToString(Decoration value) {
     case DecorationConditionalINTEL: return "ConditionalINTEL";
     case DecorationCacheControlLoadINTEL: return "CacheControlLoadINTEL";
     case DecorationCacheControlStoreINTEL: return "CacheControlStoreINTEL";
+    case DecorationIndirectlyCallableSHADY: return "IndirectlyCallableSHADY";
+    case DecorationIndirectUnsafeSHADY: return "IndirectUnsafeSHADY";
+    case DecorationReentrantSHADY: return "ReentrantSHADY";
     default: return "Unknown";
     }
 }
@@ -4247,6 +4265,10 @@ inline const char* CapabilityToString(Capability value) {
     case CapabilityCacheControlsINTEL: return "CacheControlsINTEL";
     case CapabilityRegisterLimitsINTEL: return "RegisterLimitsINTEL";
     case CapabilityBindlessImagesINTEL: return "BindlessImagesINTEL";
+    case CapabilityIndirectTailCallsSHADY: return "IndirectTailCallsSHADY";
+    case CapabilityPhysicalFunctionAddressesSHADY: return "PhysicalFunctionAddressesSHADY";
+    case CapabilityInModuleFunctionAddressSHADY: return "InModuleFunctionAddressSHADY";
+    case CapabilityCallStackSHADY: return "CallStackSHADY";
     default: return "Unknown";
     }
 }
@@ -5263,6 +5285,9 @@ inline const char* OpToString(Op value) {
     case OpConvertHandleToImageINTEL: return "OpConvertHandleToImageINTEL";
     case OpConvertHandleToSamplerINTEL: return "OpConvertHandleToSamplerINTEL";
     case OpConvertHandleToSampledImageINTEL: return "OpConvertHandleToSampledImageINTEL";
+    case OpIndirectTailCallSHADY: return "OpIndirectTailCallSHADY";
+    case OpIndirectCallSHADY: return "OpIndirectCallSHADY";
+    case OpConstantFunctionAddressSHADY: return "OpConstantFunctionAddressSHADY";
     default: return "Unknown";
     }
 }

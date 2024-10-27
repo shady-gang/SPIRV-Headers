@@ -234,6 +234,7 @@ spv = {
         'CodeSectionINTEL' : 5605,
         'DeviceOnlyINTEL' : 5936,
         'HostOnlyINTEL' : 5937,
+        'CodeSectionSHADY' : 6592,
     },
 
     'Dim' : {
@@ -614,6 +615,9 @@ spv = {
         'ConditionalINTEL' : 6247,
         'CacheControlLoadINTEL' : 6442,
         'CacheControlStoreINTEL' : 6443,
+        'IndirectlyCallableSHADY' : 6592,
+        'IndirectUnsafeSHADY' : 6593,
+        'ReentrantSHADY' : 6594,
     },
 
     'BuiltIn' : {
@@ -1252,6 +1256,10 @@ spv = {
         'CacheControlsINTEL' : 6441,
         'RegisterLimitsINTEL' : 6460,
         'BindlessImagesINTEL' : 6528,
+        'IndirectTailCallsSHADY' : 6592,
+        'PhysicalFunctionAddressesSHADY' : 6593,
+        'InModuleFunctionAddressSHADY' : 6594,
+        'CallStackSHADY' : 6595,
     },
 
     'RayFlagsShift' : {
@@ -2371,6 +2379,9 @@ spv = {
         'OpConvertHandleToImageINTEL' : 6529,
         'OpConvertHandleToSamplerINTEL' : 6530,
         'OpConvertHandleToSampledImageINTEL' : 6531,
+        'OpIndirectTailCallSHADY' : 6594,
+        'OpIndirectCallSHADY' : 6595,
+        'OpConstantFunctionAddressSHADY' : 6596,
     },
 
 }

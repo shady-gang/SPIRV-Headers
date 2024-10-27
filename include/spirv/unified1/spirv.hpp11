@@ -248,6 +248,7 @@ enum class StorageClass : unsigned {
     CodeSectionINTEL = 5605,
     DeviceOnlyINTEL = 5936,
     HostOnlyINTEL = 5937,
+    CodeSectionSHADY = 6592,
     Max = 0x7fffffff,
 };
 
@@ -641,6 +642,9 @@ enum class Decoration : unsigned {
     ConditionalINTEL = 6247,
     CacheControlLoadINTEL = 6442,
     CacheControlStoreINTEL = 6443,
+    IndirectlyCallableSHADY = 6592,
+    IndirectUnsafeSHADY = 6593,
+    ReentrantSHADY = 6594,
     Max = 0x7fffffff,
 };
 
@@ -1290,6 +1294,10 @@ enum class Capability : unsigned {
     CacheControlsINTEL = 6441,
     RegisterLimitsINTEL = 6460,
     BindlessImagesINTEL = 6528,
+    IndirectTailCallsSHADY = 6592,
+    PhysicalFunctionAddressesSHADY = 6593,
+    InModuleFunctionAddressSHADY = 6594,
+    CallStackSHADY = 6595,
     Max = 0x7fffffff,
 };
 
@@ -2437,6 +2445,9 @@ enum class Op : unsigned {
     OpConvertHandleToImageINTEL = 6529,
     OpConvertHandleToSamplerINTEL = 6530,
     OpConvertHandleToSampledImageINTEL = 6531,
+    OpIndirectTailCallSHADY = 6594,
+    OpIndirectCallSHADY = 6595,
+    OpConstantFunctionAddressSHADY = 6596,
     Max = 0x7fffffff,
 };
 
@@ -3270,6 +3281,9 @@ inline void HasResultAndType(Op opcode, bool *hasResult, bool *hasResultType) {
     case Op::OpConvertHandleToImageINTEL: *hasResult = true; *hasResultType = true; break;
     case Op::OpConvertHandleToSamplerINTEL: *hasResult = true; *hasResultType = true; break;
     case Op::OpConvertHandleToSampledImageINTEL: *hasResult = true; *hasResultType = true; break;
+    case Op::OpIndirectTailCallSHADY: *hasResult = false; *hasResultType = false; break;
+    case Op::OpIndirectCallSHADY: *hasResult = true; *hasResultType = true; break;
+    case Op::OpConstantFunctionAddressSHADY: *hasResult = true; *hasResultType = true; break;
     }
 }
 inline const char* SourceLanguageToString(SourceLanguage value) {
@@ -3467,6 +3481,7 @@ inline const char* StorageClassToString(StorageClass value) {
     case StorageClass::CodeSectionINTEL: return "CodeSectionINTEL";
     case StorageClass::DeviceOnlyINTEL: return "DeviceOnlyINTEL";
     case StorageClass::HostOnlyINTEL: return "HostOnlyINTEL";
+    case StorageClass::CodeSectionSHADY: return "CodeSectionSHADY";
     default: return "Unknown";
     }
 }
@@ -3799,6 +3814,9 @@ inline const char* DecorationToString(Decoration value) {
     case Decoration::ConditionalINTEL: return "ConditionalINTEL";
     case Decoration::CacheControlLoadINTEL: return "CacheControlLoadINTEL";
     case Decoration::CacheControlStoreINTEL: return "CacheControlStoreINTEL";
+    case Decoration::IndirectlyCallableSHADY: return "IndirectlyCallableSHADY";
+    case Decoration::IndirectUnsafeSHADY: return "IndirectUnsafeSHADY";
+    case Decoration::ReentrantSHADY: return "ReentrantSHADY";
     default: return "Unknown";
     }
 }
@@ -4247,6 +4265,10 @@ inline const char* CapabilityToString(Capability value) {
     case Capability::CacheControlsINTEL: return "CacheControlsINTEL";
     case Capability::RegisterLimitsINTEL: return "RegisterLimitsINTEL";
     case Capability::BindlessImagesINTEL: return "BindlessImagesINTEL";
+    case Capability::IndirectTailCallsSHADY: return "IndirectTailCallsSHADY";
+    case Capability::PhysicalFunctionAddressesSHADY: return "PhysicalFunctionAddressesSHADY";
+    case Capability::InModuleFunctionAddressSHADY: return "InModuleFunctionAddressSHADY";
+    case Capability::CallStackSHADY: return "CallStackSHADY";
     default: return "Unknown";
     }
 }
@@ -5263,6 +5285,9 @@ inline const char* OpToString(Op value) {
     case Op::OpConvertHandleToImageINTEL: return "OpConvertHandleToImageINTEL";
     case Op::OpConvertHandleToSamplerINTEL: return "OpConvertHandleToSamplerINTEL";
     case Op::OpConvertHandleToSampledImageINTEL: return "OpConvertHandleToSampledImageINTEL";
+    case Op::OpIndirectTailCallSHADY: return "OpIndirectTailCallSHADY";
+    case Op::OpIndirectCallSHADY: return "OpIndirectCallSHADY";
+    case Op::OpConstantFunctionAddressSHADY: return "OpConstantFunctionAddressSHADY";
     default: return "Unknown";
     }
 }
